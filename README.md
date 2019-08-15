@@ -6,7 +6,7 @@ HoopDB's (https://github.com/nowlow/HoopDB) API
 $ git clone git@github.com:nowlow/HoopDB-API.git
 $ cd HoopDB-API
 $ npm install
-$ node app.js
+$ npm start
 ```
 
 ## How to use it

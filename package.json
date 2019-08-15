@@ -1,0 +1,33 @@
+{
+  "name": "hoopdb-api",
+  "version": "1.0.0",
+  "description": "HoopDB's API",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nowlow/HoopDB-API.git"
+  },
+  "keywords": [
+    "HoopDB",
+    "NoSQL",
+    "API",
+    "Hoop",
+    "database",
+    "db"
+  ],
+  "author": "naoufeljs",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nowlow/HoopDB-API/issues"
+  },
+  "homepage": "https://github.com/nowlow/HoopDB-API#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "hoopdb": "^1.2.0",
+    "uuid": "^3.3.2"
+  }
+}
