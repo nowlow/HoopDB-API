@@ -30,12 +30,13 @@ function addLinePrimary(req, res) {
             let criteria = (req.body.criteria) ? JSON.parse(req.body.criteria) : null
 
             table.addLinePrimary(line, criteria)
-            user.hoopDB.closeTable(table)
-
-            return res.status(201).send({
+            
+            res.status(201).send({
                 success: true,
                 message: 'line added successfully',
             })
+            user.hoopDB.closeTable(table)
+            return
         } catch(e) {
             return res.status(400).send({
                 success: false,

@@ -29,12 +29,13 @@ function deleteLine(req, res) {
             let criteria = JSON.parse(req.body.criteria)
 
             table.delete(criteria)
-            user.hoopDB.closeTable(table)
-
-            return res.status(201).send({
+            
+            res.status(201).send({
                 success: true,
                 message: 'line added successfully',
             })
+            user.hoopDB.closeTable(table)
+            return
         } catch(e) {
             return res.status(400).send({
                 success: false,

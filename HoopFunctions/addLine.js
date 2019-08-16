@@ -28,12 +28,13 @@ function addLine(req, res) {
         let line = req.body
 
         table.addLine(line)
+        
         user.hoopDB.closeTable(table)
-
-        return res.status(201).send({
+        res.status(201).send({
             success: true,
             message: 'line added successfully',
         })
+        return
     }, error => {
         res.status(400).send({
             success: false,
