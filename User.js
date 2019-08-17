@@ -26,28 +26,39 @@ class User {
 
         this.userToken = null
 
-        openDbs.forEach(db => {
-            if (db.hoopDBPath === _this.hoopDBPath) {
-                if (db.token === _this.hoopDBToken) {
-                    _this.hoopDB = db
-                } else {
-                    _this.hoopDB = 'cheater'
-                }
-                return
-            }
-        })
-
-        if (this.hoopDB === null) {
-            this.hoopDB = new Hoop(this.hoopDBPath)
-            this.hoopDB.connect(this.hoopDBToken)
-
-            openDbs.push(this.hoopDB)
-        }
-
-        if (this.hoopDB !== 'cheater') {
+        this.connectionOk = function(resolve) {
             this.connected = true
             this.userToken = uuidv4()
             connectedUsers.push(this)
+            resolve(true)
+        }
+
+        this.badConnection = function(reject, error) {
+            reject(error)
+        }
+
+        this.connect = function() {
+            return new Promise(function(resolve, reject) {
+                openDbs.forEach(db => {
+                    if (db.hoopDBPath === _this.hoopDBPath) {
+                        if (db.token === _this.hoopDBToken) {
+                            _this.hoopDB = db
+                            _this.connectionOk(resolve)
+                        } else _this.badConnection(reject, "Can't connect to database")
+                        return
+                    }
+                })
+
+                if (_this.hoopDB === null) {
+                    _this.hoopDB = new Hoop(_this.hoopDBPath)
+                    _this.hoopDB.connect(_this.hoopDBToken).then(connected => {
+                        openDbs.push(_this.hoopDB)
+                        _this.connectionOk(resolve)
+                    }, error => {
+                        _this.badConnection(reject, error)
+                    })
+                }
+            })
         }
 
         this.getToken = function() {

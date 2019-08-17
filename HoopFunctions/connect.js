@@ -33,17 +33,18 @@ function connect(req, res) {
 
     user = new User(path.join(__dirname, path.join('..', req.body.database)), req.body.token)
 
-    if (user.connected === true)
+    user.connect().then(() => {
         return res.status(200).send({
             success: true,
             message: 'Successfuly connected user',
             data: user.getToken()
         })
-    else
+    }, error => {
         return res.status(500).send({
             success: false,
             message: 'Error while connecting user'
         })
+    })
 }
 
 module.exports = connect
