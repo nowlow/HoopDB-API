@@ -11,16 +11,16 @@ function listTables(req, res) {
     }
 
     user.hoopDB.listTables(req.params.table).then(tables => {
-        res.status(200).send({
+        res.status(200).send(encode(JSON.stringify({
             success: true,
             message: 'Successfuly get tables',
             data: tables
-        })
+        }), user.getEncryptionToken()))
     }, error => {
-        res.status(400).send({
+        res.status(400).send(encode(JSON.stringify({
             success: false,
             message: error
-        })
+        }), user.getEncryptionToken()))
     })
 }
 

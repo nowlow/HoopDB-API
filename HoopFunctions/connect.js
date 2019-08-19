@@ -37,7 +37,10 @@ function connect(req, res) {
         return res.status(200).send({
             success: true,
             message: 'Successfuly connected user',
-            data: user.getToken()
+            data: {
+                "user-token": user.getToken(),
+                "encryption-token": user.getEncryptionToken()
+            }
         })
     }, error => {
         return res.status(500).send({

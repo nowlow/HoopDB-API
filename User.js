@@ -29,6 +29,7 @@ class User {
         this.connectionOk = function(resolve) {
             this.connected = true
             this.userToken = uuidv4()
+            this.encryptionToken = uuidv4()
             connectedUsers.push(this)
             resolve(true)
         }
@@ -65,6 +66,9 @@ class User {
             return this.userToken
         }
 
+        this.getEncryptionToken = function() {
+            return this.encryptionToken
+        }
     }
 }
 
