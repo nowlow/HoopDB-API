@@ -6,6 +6,11 @@ const app = express()
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
+app.use(function(req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', '*')
+    next()
+})
+
 let HoopFunctions = {
     addLine: require('./HoopFunctions/addLine'),
     addLinePrimary: require('./HoopFunctions/addLinePrimary'),

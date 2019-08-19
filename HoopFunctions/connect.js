@@ -34,7 +34,6 @@ function connect(req, res) {
     user = new User(path.join(__dirname, path.join('..', req.body.database)), req.body.token)
 
     user.connect().then(() => {
-        res.setHeader('Access-Control-Allow-Origin','*') 
         return res.status(200).send({
             success: true,
             message: 'Successfuly connected user',
